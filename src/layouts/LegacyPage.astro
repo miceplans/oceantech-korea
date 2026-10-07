@@ -232,6 +232,18 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
     margin-top: auto;
   }
 
+  /* Selected/hovered menu item: no color, pill background or underline; bold only. */
+  .elementor-nav-menu--main .elementor-nav-menu a.elementor-item:is(:hover, :focus-visible, .elementor-item-active, .highlighted),
+  .elementor-nav-menu--main .elementor-nav-menu a.elementor-sub-item:is(:hover, :focus-visible, .elementor-item-active) {
+    color: inherit !important;
+    background: transparent !important;
+    font-weight: 800 !important;
+  }
+  .elementor-nav-menu--main .elementor-nav-menu a.elementor-item::before,
+  .elementor-nav-menu--main .elementor-nav-menu a.elementor-item::after {
+    display: none !important;
+  }
+
   /* Floating header (Elementor sticky runtime is not available either). */
   header.elementor-location-header {
     position: sticky;
@@ -284,7 +296,7 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
     }
     .elementor-nav-menu--main .elementor-nav-menu .menu-item-has-children > ul.sub-menu a {
       white-space: normal;
-      padding-inline: 8px;
+      padding-inline: 8px !important;
       word-break: keep-all;
     }
     .elementor-nav-menu--main {
@@ -293,8 +305,11 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
     }
     /* Equal-width top-level items so the submenu columns line up evenly. */
     .elementor-nav-menu--main .elementor-nav-menu > li.menu-item {
-      flex: 0 0 168px;
-      width: 168px;
+      flex: 0 1 168px;
+      min-width: 0;
+    }
+    .elementor-nav-menu--main .elementor-nav-menu {
+      flex-wrap: nowrap;
     }
     .elementor-nav-menu--main .elementor-nav-menu > li.menu-item > a {
       justify-content: center;
