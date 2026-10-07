@@ -24,6 +24,39 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
       // Fallback for the missing Elementor Pro nav-menu handler chunk
       // (nav-menu.*.bundle.min.js was never crawled): burger toggle only;
       // submenus are always expanded via CSS.
+      // Floating header: sticky at the top, narrower + translucent once scrolled.
+      (function () {
+        var header = document.querySelector('header.elementor-location-header');
+        if (!header) return;
+        function update() {
+          header.classList.toggle('is-scrolled', window.scrollY > 40);
+        }
+        window.addEventListener('scroll', update, { passive: true });
+        update();
+      })();
+      // Desktop: one shared panel under the menu bar. Size it to the first/last
+      // top-level item and the tallest submenu column.
+      document.querySelectorAll('nav.elementor-nav-menu--main').forEach(function (nav) {
+        function sizePanel() {
+          var items = nav.querySelectorAll(':scope > ul > li');
+          if (!items.length) return;
+          var navRect = nav.getBoundingClientRect();
+          var first = items[0].getBoundingClientRect();
+          var last = items[items.length - 1].getBoundingClientRect();
+          var height = 0;
+          nav.querySelectorAll('ul.sub-menu').forEach(function (ul) {
+            var prev = ul.style.display;
+            ul.style.display = 'block';
+            height = Math.max(height, ul.offsetHeight);
+            ul.style.display = prev;
+          });
+          nav.style.setProperty('--mega-left', first.left - navRect.left + 'px');
+          nav.style.setProperty('--mega-w', last.right - first.left + 'px');
+          nav.style.setProperty('--mega-h', height + 'px');
+        }
+        nav.addEventListener('mouseover', sizePanel);
+        nav.addEventListener('focusin', sizePanel);
+      });
       document.querySelectorAll('.elementor-widget-nav-menu').forEach(function (widget) {
         var toggle = widget.querySelector('.elementor-menu-toggle');
         var dropdown = widget.querySelector('nav.elementor-nav-menu--dropdown');
@@ -140,8 +173,6 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
     transform: translateY(-4px);
     box-shadow: 0 2px 4px rgba(11, 31, 51, .05), 0 24px 48px -12px rgba(10, 76, 196, .22);
   }
-  .elementor-widget-image img { border-radius: 12px; }
-  .elementor-location-header .elementor-widget-image img { border-radius: 0; }
 
   /* Buttons & form controls */
   body :is(.elementor-button, .kboard-button-action, .kboard-default-button-small, button[type='submit'], input[type='submit']) {
@@ -201,6 +232,35 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
     margin-top: auto;
   }
 
+  /* Floating header (Elementor sticky runtime is not available either). */
+  header.elementor-location-header {
+    position: sticky;
+    top: 0;
+    z-index: 9990;
+    transition: top 0.25s ease;
+  }
+  header.elementor-location-header > .e-parent {
+    transition: width 0.25s ease, background-color 0.25s ease, border-radius 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  header.elementor-location-header.is-scrolled {
+    top: 8px;
+  }
+  header.elementor-location-header.is-scrolled > .e-parent {
+    width: calc(100% - 32px) !important;
+    margin-inline: auto !important;
+    background-color: rgba(255, 255, 255, 0.78) !important;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  }
+  @media (min-width: 1025px) {
+    header.elementor-location-header.is-scrolled > .e-parent {
+      width: calc(100% - 96px) !important;
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+  }
+
   /* The Elementor Pro nav-menu handler chunk (nav-menu.*.bundle.min.js) is not
      available in this static export, so SmartMenus never initializes and
      `.elementor-nav-menu ul { display: none }` keeps every submenu hidden.
@@ -226,6 +286,29 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
       white-space: normal;
       padding-inline: 8px;
       word-break: keep-all;
+    }
+    .elementor-nav-menu--main {
+      position: relative;
+      isolation: isolate;
+    }
+    .elementor-nav-menu--main:hover::before,
+    .elementor-nav-menu--main:focus-within::before {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: var(--mega-left, 0);
+      width: var(--mega-w, 100%);
+      height: var(--mega-h, 0);
+      background: #fff;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+      z-index: -1;
+    }
+    .elementor-nav-menu--main .elementor-nav-menu .menu-item-has-children > ul.sub-menu {
+      background: transparent !important;
+      box-shadow: none !important;
+      border: 0 !important;
+      border-radius: 0 !important;
     }
     .elementor-nav-menu--main:hover .elementor-nav-menu .menu-item-has-children > ul.sub-menu,
     .elementor-nav-menu--main:focus-within .elementor-nav-menu .menu-item-has-children > ul.sub-menu {
