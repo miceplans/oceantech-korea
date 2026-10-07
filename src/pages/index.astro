@@ -1,0 +1,7 @@
+---
+import LegacyPage from '../layouts/LegacyPage.astro';
+import { loadLegacyPage } from '../lib/legacy-pages';
+
+const page = await loadLegacyPage('index.html');
+---
+<LegacyPage page={page} />

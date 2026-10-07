@@ -1,0 +1,21 @@
+---
+import type { LegacyPage } from '../lib/legacy-pages';
+
+interface Props {
+  page: LegacyPage;
+}
+
+const { page } = Astro.props;
+const hasBoardList = page.body.includes('id="kboard-default-list"');
+---
+<!doctype html>
+<html lang={page.lang}>
+  <head>
+    <Fragment set:html={page.head} />
+    {page.redirect && <meta http-equiv="refresh" content={`0;url=${page.redirect}`} />}
+    {hasBoardList && <script src="/board-search.js" defer is:inline></script>}
+  </head>
+  <body class={page.bodyClass}>
+    {page.redirect ? <a href={page.redirect}>이동한 페이지 보기</a> : <Fragment set:html={page.body} />}
+  </body>
+</html>

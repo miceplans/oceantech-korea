@@ -1,0 +1,15 @@
+---
+import LegacyPage from '../layouts/LegacyPage.astro';
+import { listLegacyPages, loadLegacyPage, routeFor } from '../lib/legacy-pages';
+
+export async function getStaticPaths() {
+  const files = await listLegacyPages();
+  return files.filter((file) => !file.endsWith('/index.html') && file !== 'index.html').map((file) => ({
+    params: { path: routeFor(file).slice(1, -'.html'.length) },
+    props: { source: file },
+  }));
+}
+
+const page = await loadLegacyPage(Astro.props.source);
+---
+<LegacyPage page={page} />
