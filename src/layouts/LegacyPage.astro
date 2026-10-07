@@ -59,4 +59,36 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
   body > .elementor-location-footer {
     margin-top: auto;
   }
+
+  /* The Elementor Pro nav-menu handler chunk (nav-menu.*.bundle.min.js) is not
+     available in this static export, so SmartMenus never initializes and
+     `.elementor-nav-menu ul { display: none }` keeps every submenu hidden.
+     Provide hover dropdowns for the desktop menu and a closed default state for
+     the burger dropdown, mirroring the widget's own behavior. */
+  @media (min-width: 1025px) {
+    .elementor-nav-menu--main .elementor-nav-menu .menu-item-has-children {
+      position: relative;
+    }
+    .elementor-nav-menu--main .elementor-nav-menu .menu-item-has-children > ul.sub-menu {
+      top: 100%;
+      inset-inline-start: 0;
+      display: none;
+    }
+    .elementor-nav-menu--main .elementor-nav-menu .menu-item-has-children > li:last-child > ul.sub-menu,
+    .elementor-nav-menu--main .elementor-nav-menu > li:last-child.menu-item-has-children > ul.sub-menu {
+      inset-inline-start: auto;
+      inset-inline-end: 0;
+    }
+    .elementor-nav-menu--main .elementor-nav-menu .menu-item-has-children:hover > ul.sub-menu,
+    .elementor-nav-menu--main .elementor-nav-menu .menu-item-has-children:focus-within > ul.sub-menu {
+      display: block;
+      z-index: 9999;
+    }
+  }
+  nav.elementor-nav-menu--dropdown.elementor-nav-menu__container[aria-hidden='true'] {
+    display: none;
+  }
+  nav.elementor-nav-menu--dropdown.elementor-nav-menu__container[aria-hidden='false'] {
+    display: block;
+  }
 </style>
