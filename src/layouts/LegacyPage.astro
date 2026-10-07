@@ -296,10 +296,13 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
       flex: 0 0 168px;
       width: 168px;
     }
-    .elementor-nav-menu--main .elementor-nav-menu > li.menu-item > a,
-    .elementor-nav-menu--main .elementor-nav-menu > li.menu-item > ul.sub-menu a {
+    .elementor-nav-menu--main .elementor-nav-menu > li.menu-item > a {
       justify-content: center;
       text-align: center;
+    }
+    .elementor-nav-menu--main .elementor-nav-menu > li.menu-item > ul.sub-menu a {
+      justify-content: flex-start;
+      text-align: left;
     }
     .elementor-nav-menu--main:hover::before,
     .elementor-nav-menu--main:focus-within::before {
