@@ -227,7 +227,7 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
   .elementor-location-footer a:visited { color: rgba(255, 255, 255, .9); transition: color .15s; }
   .elementor-location-footer a:hover { color: var(--ot-brand-2); }
 
-  .ot-footer-ruler-wrap { background: var(--ot-ink); padding: 24px 16px 0; }
+  .ot-footer-ruler-wrap { background: #0B0B0B; padding: 24px 16px 0; }
   .ot-footer-ruler { display: block; width: min(100%, 720px); height: auto; margin: 0 auto; }
 
   /* Respect reduced motion */
@@ -265,6 +265,14 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
     top: auto !important;
     left: auto !important;
     transition: background-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  /* Material-book year tabs: the 2026 button's element id (26a8e1f1) has no
+     width/color rule in the crawled CSS, so it collapsed. Match its siblings. */
+  .elementor-9007 .elementor-element.elementor-element-26a8e1f1 { width: 100%; max-width: 100%; }
+  .elementor-9007 .elementor-element.elementor-element-26a8e1f1 .elementor-button {
+    background-color: var(--e-global-color-08d83bb);
+    fill: #fff;
+    color: #fff;
   }
   /* Elementor's sticky spacer clones would double the header height. */
   header.elementor-location-header > .elementor-sticky__spacer {
