@@ -1,0 +1,93 @@
+/* Native board (list + post). Uses the --ot-* tokens from LegacyPage. */
+.oc-board, .oc-board-post {
+  --b-line: var(--ot-line, #e4edf4);
+  --b-ink: var(--ot-ink, #0b1f33);
+  --b-brand: var(--ot-brand, #0a4cc4);
+  color: var(--b-ink);
+  font-size: 15px;
+  width: 100%;
+}
+.oc-board-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.oc-board-total { font-size: 14px; }
+.oc-board-total strong { color: var(--b-brand); }
+.oc-board-sort { width: auto; min-width: 110px; }
+
+.oc-board-table {
+  border: 1px solid var(--b-line);
+  border-radius: var(--ot-radius, 16px);
+  overflow: hidden;
+  background: #fff;
+  box-shadow: var(--ot-shadow, 0 1px 2px rgba(11, 31, 51, .05));
+}
+.oc-board-table table { width: 100%; margin: 0; border-collapse: collapse; table-layout: fixed; }
+.oc-board-table th, .oc-board-table td {
+  padding: 14px 8px; text-align: center; vertical-align: middle; border: 0;
+  border-bottom: 1px solid var(--b-line); background: transparent;
+}
+.oc-board-table thead th {
+  background: var(--ot-surface, #f3f8fc); color: #153a5d; font-weight: 700; border-bottom: 2px solid #d7e6f2;
+}
+.oc-board-table tbody tr { transition: background-color .15s; }
+.oc-board-table tbody tr:hover { background: #eaf4fb; }
+.oc-board-table tbody tr:last-child td { border-bottom: 0; }
+.oc-col-no { width: 72px; }
+.oc-col-author { width: 130px; white-space: nowrap; }
+.oc-col-date { width: 110px; white-space: nowrap; }
+.oc-col-views { width: 64px; }
+.oc-board-table td.oc-col-title { text-align: left; padding-left: 16px; word-break: keep-all; }
+.oc-board-table td.oc-col-title a { color: inherit; font-weight: 500; text-decoration: none; }
+.oc-board-table td.oc-col-title a:is(:hover, :focus-visible) { color: #084496; text-decoration: underline; }
+.oc-board-table th.oc-col-title { text-align: left; padding-left: 16px; }
+.oc-board-meta { display: none; margin-top: 4px; font-size: 13px; color: #5b7084; }
+.oc-board-empty { padding: 48px 0 !important; color: #5b7084; }
+
+.oc-board-pagination { margin: 22px 0 6px; }
+.oc-board-pages { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.oc-board-pages li { margin: 0; }
+.oc-board-pages a {
+  display: block; min-width: 36px; padding: 7px 10px; text-align: center; border-radius: 10px;
+  border: 1px solid var(--b-line); color: var(--b-ink); text-decoration: none; font-size: 14px; background: #fff;
+}
+.oc-board-pages a:is(:hover, :focus-visible) { border-color: var(--b-brand); color: var(--b-brand); }
+.oc-board-pages li.active a { background: var(--b-brand); border-color: var(--b-brand); color: #fff; font-weight: 700; }
+
+.oc-board-search { display: flex; justify-content: center; gap: 8px; margin: 18px 0 0; }
+.oc-board-search select { width: auto; min-width: 96px; }
+.oc-board-search input[type='text'] { width: min(320px, 100%); }
+.oc-board-search button {
+  padding: 10px 20px; border: 0; border-radius: 999px; background: var(--b-brand); color: #fff; font-weight: 600; cursor: pointer;
+}
+
+/* Post */
+.oc-board-post-head { padding-bottom: 18px; border-bottom: 2px solid #d7e6f2; }
+.oc-board-post-head h1 { margin: 0 0 14px; font-size: clamp(22px, 3vw, 30px); line-height: 1.4; word-break: keep-all; }
+.oc-board-post-head dl { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0; font-size: 14px; color: #5b7084; }
+.oc-board-post-head dl div { display: flex; gap: 8px; }
+.oc-board-post-head dt { font-weight: 600; }
+.oc-board-post-head dd { margin: 0; }
+.oc-board-post-body { padding: 28px 0 36px; line-height: 1.8; overflow-wrap: anywhere; min-height: 120px; }
+.oc-board-post-body img { max-width: 100%; height: auto; }
+.oc-board-post-body table { max-width: 100%; }
+.oc-board-post-nav { border-top: 1px solid var(--b-line); }
+.oc-board-post-nav > * {
+  display: flex; gap: 16px; align-items: baseline; padding: 14px 8px; color: inherit; text-decoration: none;
+  border-bottom: 1px solid var(--b-line);
+}
+.oc-board-post-nav a:is(:hover, :focus-visible) { background: #eaf4fb; }
+.oc-board-post-nav .is-empty { color: #8a9bab; }
+.oc-board-nav-label { flex: 0 0 56px; font-weight: 700; color: #153a5d; font-size: 14px; }
+.oc-board-nav-title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.oc-board-post-actions { display: flex; justify-content: center; margin-top: 28px; }
+.oc-board-button {
+  display: inline-block; padding: 11px 32px; border-radius: 999px; background: var(--b-brand); color: #fff;
+  font-weight: 600; text-decoration: none;
+}
+.oc-board-button:is(:hover, :focus-visible) { opacity: .85; color: #fff; }
+
+@media (max-width: 767px) {
+  .oc-board-table thead, .oc-col-author, .oc-col-date, .oc-col-views { display: none; }
+  .oc-board-table td.oc-col-no { width: 48px; padding-inline: 4px; }
+  .oc-board-meta { display: block; }
+  .oc-board-search { flex-wrap: wrap; }
+  .oc-board-search input[type='text'] { flex: 1 1 100%; order: 3; width: 100%; }
+}

@@ -1,8 +1,10 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
+import { renderBoards, stripKboardHead } from './board';
 
 const sourceRoot = path.resolve('src/legacy');
+let sourceSet: Promise<Set<string>> | undefined;
 
 export interface LegacyPage {
   source: string;
@@ -55,11 +57,17 @@ export async function loadLegacyPage(source: string): Promise<LegacyPage> {
     },
   );
 
+  sourceSet ??= listLegacyPages().then((files) => new Set(files));
+  const boardBody = renderBoards(body[2], { source, sources: await sourceSet });
+
   return {
     source,
     route: routeFor(source),
-    head: localize(head),
-    body: localize(body[2]),
+    head: localize(stripKboardHead(head)).replace(
+      /(<meta property="og:url" content=")\/q-kboard_content_redirect-\d+\.html/,
+      `$1${routeFor(source)}`,
+    ),
+    body: localize(boardBody),
     bodyClass: body[1].match(/\bclass=["']([^"']*)["']/i)?.[1] ?? '',
     lang: html.match(/<html\b[^>]*\blang=["']([^"']*)["']/i)?.[1] ?? 'ko',
     redirect: !html.includes('</body>')
