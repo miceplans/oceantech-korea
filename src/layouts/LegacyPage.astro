@@ -19,3 +19,14 @@ const hasBoardList = page.body.includes('id="kboard-default-list"');
     {page.redirect ? <a href={page.redirect}>이동한 페이지 보기</a> : <Fragment set:html={page.body} />}
   </body>
 </html>
+
+<style is:global>
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  body > .elementor-location-footer {
+    margin-top: auto;
+  }
+</style>
