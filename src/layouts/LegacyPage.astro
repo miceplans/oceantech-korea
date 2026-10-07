@@ -291,6 +291,16 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
       position: relative;
       isolation: isolate;
     }
+    /* Equal-width top-level items so the submenu columns line up evenly. */
+    .elementor-nav-menu--main .elementor-nav-menu > li.menu-item {
+      flex: 0 0 168px;
+      width: 168px;
+    }
+    .elementor-nav-menu--main .elementor-nav-menu > li.menu-item > a,
+    .elementor-nav-menu--main .elementor-nav-menu > li.menu-item > ul.sub-menu a {
+      justify-content: center;
+      text-align: center;
+    }
     .elementor-nav-menu--main:hover::before,
     .elementor-nav-menu--main:focus-within::before {
       content: '';
