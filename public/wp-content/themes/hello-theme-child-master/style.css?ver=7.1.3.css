@@ -156,3 +156,63 @@ body .elementor-popup-modal .dialog-widget-content {
     max-height: 36px;
   }
 }
+
+/* Program graphic: give the long schedule a readable, contained width. */
+.elementor-18 .elementor-element.elementor-element-d548a6d {
+  width: min(100%, 760px);
+  max-width: 760px;
+}
+.elementor-18 img.wp-image-9904 {
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 10px;
+}
+
+/* Notice and archive tables */
+body #kboard-default-list .kboard-list table td.kboard-list-user {
+  width: 130px;
+  white-space: nowrap;
+  word-break: normal;
+}
+body #kboard-default-list .kboard-list table td.kboard-list-date {
+  width: 100px;
+  white-space: nowrap;
+}
+body #kboard-default-list .kboard-list thead tr td {
+  color: #153a5d;
+  border-bottom: 2px solid #d7e6f2;
+}
+body #kboard-default-list .kboard-list tbody tr.kboard-list-notice {
+  background-color: #f3f8fc;
+}
+body #kboard-default-list .kboard-list tbody tr:hover {
+  background-color: #eaf4fb;
+}
+body #kboard-default-list .kboard-list tbody tr td {
+  border-bottom: 1px solid #e4edf4;
+}
+body #kboard-default-list .kboard-list table a:hover,
+body #kboard-default-list .kboard-list table a:focus-visible {
+  color: #084496;
+  text-decoration: underline;
+}
+@media (max-width: 1024px) {
+  body #kboard-default-list .kboard-list table td.kboard-list-vote,
+  body #kboard-default-list .kboard-list table td.kboard-list-view {
+    display: none;
+  }
+}
+
+/* Archive year tabs need readable labels in every state. */
+.elementor-8792 .elementor-element.elementor-element-89d7ba7 .e-n-tab-title[aria-selected="false"] {
+  color: #153a5d;
+  background-color: #edf3f8;
+}
+.elementor-8792 .elementor-element.elementor-element-89d7ba7 .e-n-tab-title[aria-selected="false"]:is(:hover, :focus-visible) {
+  color: #084496;
+  background-color: #dcebf7;
+}
+.elementor-8792 .elementor-element.elementor-element-89d7ba7 .e-n-tab-title[aria-selected="true"] {
+  color: #fff;
+  background-color: #084496;
+}
