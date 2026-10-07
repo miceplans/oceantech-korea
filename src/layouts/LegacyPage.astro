@@ -7,16 +7,46 @@ interface Props {
 
 const { page } = Astro.props;
 const hasBoardList = page.body.includes('id="kboard-default-list"');
+const hasYearTabs = page.body.includes('e-n-tab-title');
 ---
 <!doctype html>
 <html lang={page.lang}>
   <head>
     <Fragment set:html={page.head} />
+    {hasYearTabs && <script src="/year-tabs.js" defer is:inline></script>}
     {page.redirect && <meta http-equiv="refresh" content={`0;url=${page.redirect}`} />}
     {hasBoardList && <script src="/board-search.js" defer is:inline></script>}
   </head>
   <body class={page.bodyClass}>
     {page.redirect ? <a href={page.redirect}>이동한 페이지 보기</a> : <Fragment set:html={page.body} />}
+    <script is:inline>
+      // Fallback for the missing Elementor Pro nav-menu handler chunk
+      // (nav-menu.*.bundle.min.js was never crawled): burger toggle and nested
+      // submenu toggles inside the mobile dropdown.
+      document.querySelectorAll('.elementor-widget-nav-menu').forEach(function (widget) {
+        var toggle = widget.querySelector('.elementor-menu-toggle');
+        var dropdown = widget.querySelector('nav.elementor-nav-menu--dropdown');
+        if (!toggle || !dropdown) return;
+        toggle.addEventListener('click', function () {
+          var open = dropdown.getAttribute('aria-hidden') === 'true';
+          dropdown.setAttribute('aria-hidden', open ? 'false' : 'true');
+          toggle.classList.toggle('elementor-active', open);
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        dropdown.querySelectorAll('.menu-item-has-children > a .sub-arrow').forEach(function (arrow) {
+          arrow.addEventListener('click', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var item = arrow.closest('a').parentElement;
+            var subMenu = item.querySelector(':scope > ul.sub-menu');
+            if (!subMenu) return;
+            var show = subMenu.style.display !== 'block';
+            subMenu.style.display = show ? 'block' : '';
+            arrow.style.transform = show ? 'rotate(180deg)' : '';
+          });
+        });
+      });
+    </script>
   </body>
 </html>
 
