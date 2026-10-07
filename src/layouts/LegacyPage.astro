@@ -13,6 +13,7 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
 <html lang={page.lang}>
   <head>
     <Fragment set:html={page.head} />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
     {hasYearTabs && <script src="/year-tabs.js" defer is:inline></script>}
     {page.redirect && <meta http-equiv="refresh" content={`0;url=${page.redirect}`} />}
     {hasBoardList && <script src="/board-search.js" defer is:inline></script>}
@@ -21,29 +22,29 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
     {page.redirect ? <a href={page.redirect}>이동한 페이지 보기</a> : <Fragment set:html={page.body} />}
     <script is:inline>
       // Fallback for the missing Elementor Pro nav-menu handler chunk
-      // (nav-menu.*.bundle.min.js was never crawled): burger toggle and nested
-      // submenu toggles inside the mobile dropdown.
+      // (nav-menu.*.bundle.min.js was never crawled): burger toggle only;
+      // submenus are always expanded via CSS.
       document.querySelectorAll('.elementor-widget-nav-menu').forEach(function (widget) {
         var toggle = widget.querySelector('.elementor-menu-toggle');
         var dropdown = widget.querySelector('nav.elementor-nav-menu--dropdown');
         if (!toggle || !dropdown) return;
         toggle.addEventListener('click', function () {
           var open = dropdown.getAttribute('aria-hidden') === 'true';
+          if (open) {
+            // Elementor sizes the dropdown to the viewport via JS; do the same.
+            var top = toggle.getBoundingClientRect().bottom;
+            dropdown.style.position = 'fixed';
+            dropdown.style.left = '0';
+            dropdown.style.right = '0';
+            dropdown.style.width = '100%';
+            dropdown.style.top = top + 'px';
+            dropdown.style.maxHeight = 'calc(100vh - ' + top + 'px)';
+            dropdown.style.overflowY = 'auto';
+            dropdown.style.zIndex = '9999';
+          }
           dropdown.setAttribute('aria-hidden', open ? 'false' : 'true');
           toggle.classList.toggle('elementor-active', open);
           toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        });
-        dropdown.querySelectorAll('.menu-item-has-children > a .sub-arrow').forEach(function (arrow) {
-          arrow.addEventListener('click', function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-            var item = arrow.closest('a').parentElement;
-            var subMenu = item.querySelector(':scope > ul.sub-menu');
-            if (!subMenu) return;
-            var show = subMenu.style.display !== 'block';
-            subMenu.style.display = show ? 'block' : '';
-            arrow.style.transform = show ? 'rotate(180deg)' : '';
-          });
         });
       });
     </script>
@@ -51,10 +52,150 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
 </html>
 
 <style is:global>
+  /* ---- Modern look: tokens ---- */
+  :root {
+    --ot-ink: #0b1f33;
+    --ot-muted: #5b6b7b;
+    --ot-brand: #0a4cc4;
+    --ot-brand-2: #12b5d6;
+    --ot-surface: #f5f8fc;
+    --ot-line: #e3eaf2;
+    --ot-radius: 16px;
+    --ot-shadow: 0 1px 2px rgba(11, 31, 51, .04), 0 12px 32px -8px rgba(11, 31, 51, .12);
+  }
+  html { scroll-behavior: smooth; }
+  ::selection { background: var(--ot-brand); color: #fff; }
+
   body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
+    color: var(--ot-ink);
+    letter-spacing: -.01em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body :is(h1, h2, h3, h4, h5, h6, .elementor-heading-title, p, li, td, th, a, span, button, input, textarea) {
+    font-family: inherit;
+  }
+  body :is(h1, h2, h3, .elementor-heading-title) { letter-spacing: -.025em; }
+
+  /* Header: frosted glass bar with soft hairline */
+  .elementor-location-header {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, .78);
+    -webkit-backdrop-filter: saturate(180%) blur(16px);
+    backdrop-filter: saturate(180%) blur(16px);
+  }
+  .elementor-location-header .elementor-element { background-color: transparent; }
+  .elementor-48 .elementor-element.elementor-element-981c368,
+  .elementor-48 .elementor-element.elementor-element-0e9b431 {
+    box-shadow: none;
+    border-bottom: 1px solid rgba(11, 31, 51, .06);
+  }
+  .elementor-48 .elementor-element.elementor-element-c8ae8b5 .elementor-nav-menu--main > .elementor-nav-menu > .menu-item > .elementor-item {
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: .02em;
+    color: var(--ot-ink);
+    transition: background-color .2s, color .2s;
+  }
+  .elementor-48 .elementor-element.elementor-element-c8ae8b5 .elementor-nav-menu--main > .elementor-nav-menu > .menu-item > .elementor-item:is(:hover, :focus-visible, .elementor-item-active) {
+    color: var(--ot-brand);
+    background: rgba(10, 76, 196, .08);
+  }
+  .elementor-48 .elementor-element.elementor-element-c8ae8b5 .elementor-nav-menu--main .sub-menu {
+    margin-top: 6px;
+    padding: 8px;
+    border: 1px solid var(--ot-line);
+    border-radius: 14px;
+    box-shadow: 0 20px 40px -12px rgba(11, 31, 51, .22);
+    background: #fff;
+  }
+  .elementor-48 .elementor-element.elementor-element-c8ae8b5 .elementor-nav-menu--main .sub-menu .elementor-sub-item {
+    border-radius: 8px;
+    transition: background-color .15s, color .15s;
+  }
+  .elementor-48 .elementor-element.elementor-element-c8ae8b5 .elementor-nav-menu--main .sub-menu .elementor-sub-item:is(:hover, :focus-visible) {
+    background: var(--ot-surface);
+    color: var(--ot-brand);
+  }
+
+  /* Cards: image boxes and images */
+  .elementor-widget-image-box .elementor-image-box-wrapper,
+  .elementor-widget-image-box > .elementor-widget-container {
+    border-radius: var(--ot-radius);
+  }
+  .elementor-widget-image-box > .elementor-widget-container {
+    background: #fff;
+    border: 1px solid var(--ot-line);
+    box-shadow: var(--ot-shadow);
+    padding: 24px;
+    height: 100%;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .elementor-widget-image-box > .elementor-widget-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 2px 4px rgba(11, 31, 51, .05), 0 24px 48px -12px rgba(10, 76, 196, .22);
+  }
+  .elementor-widget-image img { border-radius: 12px; }
+  .elementor-location-header .elementor-widget-image img { border-radius: 0; }
+
+  /* Buttons & form controls */
+  body :is(.elementor-button, .kboard-button-action, .kboard-default-button-small, button[type='submit'], input[type='submit']) {
+    border-radius: 999px;
+    font-weight: 600;
+    transition: transform .15s, box-shadow .2s, background-color .2s;
+  }
+  body :is(.elementor-button, button[type='submit'], input[type='submit']):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px -8px rgba(10, 76, 196, .45);
+  }
+  body :is(input[type='text'], input[type='search'], input[type='email'], select, textarea) {
+    border: 1px solid var(--ot-line);
+    border-radius: 10px;
+    padding: 10px 14px;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  body :is(input, select, textarea):focus {
+    outline: none;
+    border-color: var(--ot-brand);
+    box-shadow: 0 0 0 4px rgba(10, 76, 196, .12);
+  }
+
+  /* Board lists */
+  body #kboard-default-list .kboard-list {
+    border: 1px solid var(--ot-line);
+    border-radius: var(--ot-radius);
+    overflow: hidden;
+    box-shadow: var(--ot-shadow);
+    background: #fff;
+  }
+  body #kboard-default-list .kboard-list thead tr td {
+    background: var(--ot-surface);
+    font-weight: 700;
+    border-bottom: 1px solid var(--ot-line);
+  }
+  body #kboard-default-list .kboard-list tbody tr { transition: background-color .15s; }
+
+  /* Footer */
+  .elementor-location-footer {
+    background: var(--ot-ink);
+    color: rgba(255, 255, 255, .75);
+  }
+  .elementor-location-footer :is(.elementor-element, .elementor-widget-container) { background-color: transparent; }
+  .elementor-location-footer :is(h1, h2, h3, h4, .elementor-heading-title) { color: #fff; }
+  .elementor-location-footer :is(p, li, span, .elementor-icon-list-text, .elementor-widget-text-editor) { color: rgba(255, 255, 255, .75); }
+  .elementor-location-footer a,
+  .elementor-location-footer a:visited { color: rgba(255, 255, 255, .9); transition: color .15s; }
+  .elementor-location-footer a:hover { color: var(--ot-brand-2); }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
   }
   body > .elementor-location-footer {
     margin-top: auto;
@@ -63,8 +204,8 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
   /* The Elementor Pro nav-menu handler chunk (nav-menu.*.bundle.min.js) is not
      available in this static export, so SmartMenus never initializes and
      `.elementor-nav-menu ul { display: none }` keeps every submenu hidden.
-     Provide hover dropdowns for the desktop menu and a closed default state for
-     the burger dropdown, mirroring the widget's own behavior. */
+     Desktop: hovering the menu bar opens all submenus at once.
+     Mobile: the burger dropdown always shows every submenu expanded. */
   @media (min-width: 1025px) {
     .elementor-nav-menu--main .elementor-nav-menu .menu-item-has-children {
       position: relative;
@@ -73,14 +214,21 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
       top: 100%;
       inset-inline-start: 0;
       display: none;
+      width: 100% !important;
+      min-width: 0 !important;
+      white-space: normal;
     }
-    .elementor-nav-menu--main .elementor-nav-menu .menu-item-has-children > li:last-child > ul.sub-menu,
     .elementor-nav-menu--main .elementor-nav-menu > li:last-child.menu-item-has-children > ul.sub-menu {
       inset-inline-start: auto;
       inset-inline-end: 0;
     }
-    .elementor-nav-menu--main .elementor-nav-menu .menu-item-has-children:hover > ul.sub-menu,
-    .elementor-nav-menu--main .elementor-nav-menu .menu-item-has-children:focus-within > ul.sub-menu {
+    .elementor-nav-menu--main .elementor-nav-menu .menu-item-has-children > ul.sub-menu a {
+      white-space: normal;
+      padding-inline: 8px;
+      word-break: keep-all;
+    }
+    .elementor-nav-menu--main:hover .elementor-nav-menu .menu-item-has-children > ul.sub-menu,
+    .elementor-nav-menu--main:focus-within .elementor-nav-menu .menu-item-has-children > ul.sub-menu {
       display: block;
       z-index: 9999;
     }
@@ -90,5 +238,13 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
   }
   nav.elementor-nav-menu--dropdown.elementor-nav-menu__container[aria-hidden='false'] {
     display: block;
+  }
+  nav.elementor-nav-menu--dropdown .menu-item-has-children > ul.sub-menu {
+    display: block;
+    position: static;
+    width: 100%;
+  }
+  nav.elementor-nav-menu--dropdown .sub-arrow {
+    display: none;
   }
 </style>
