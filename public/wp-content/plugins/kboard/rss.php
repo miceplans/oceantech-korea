@@ -105,7 +105,7 @@
 발표가 진행될 예정입니다</span>.</p><p class="MsoNormal"><span>사전등록 기간이 얼마
 남지 않았으니 많은 관심과 참여를 부탁드립니다</span>.</p><p class="MsoNormal"><span>사전등록 바로가기</span></p><p>
 
-</p><p class="MsoNormal"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdGcOPR4pQKolsP5btiVJy68KFJB2sO4ix19tTvu_RP-M5sbA/viewform?usp=header"><b><span>사전등록</span> CLICK!!</b> </a></p><p class="MsoNormal"><img src="https://k-oceantech.org/wp-content/uploads/kboard_attached/1/202510/68fdc11548e714371294.jpg" alt="" style="font-size:1rem;" /></p>]]></description>
+</p><p class="MsoNormal"><a href="https://forms.gle/24WCKbzUhtc9cvWD8"><b><span>사전등록</span> CLICK!!</b> </a></p><p class="MsoNormal"><img src="https://k-oceantech.org/wp-content/uploads/kboard_attached/1/202510/68fdc11548e714371294.jpg" alt="" style="font-size:1rem;" /></p>]]></description>
 			<author><![CDATA[oceantechkorea]]></author>
 			<pubDate>Tue, 21 Oct 2025 15:36:20 +0000</pubDate>
 			<category domain="https://k-oceantech.org/?kboard_redirect=1"><![CDATA[공지사항]]></category>
