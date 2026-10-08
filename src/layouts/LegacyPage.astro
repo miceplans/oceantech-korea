@@ -469,4 +469,114 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
     font-weight: 800 !important;
   }
 
+  /* Business meeting: use the full page width for the poster and keep the
+     actions in a centered row beneath it. */
+  .elementor-8942 .elementor-element.elementor-element-b8b9632 {
+    --width: 100%;
+    --margin-top: 0;
+    --margin-bottom: 0;
+    --margin-left: 0;
+    --margin-right: 0;
+    --padding-left: 0;
+    --padding-right: 0;
+    --row-gap: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+  .elementor-8942 .elementor-element.elementor-element-49c2b47 img {
+    display: block;
+    width: 100%;
+    max-width: 100vw;
+    height: auto;
+  }
+  .elementor-8942 .elementor-element.elementor-element-ca7a3f2 {
+    --margin-top: 0;
+    --margin-left: 0;
+    --justify-content: center;
+    --align-items: center;
+    --gap: 12px;
+    --column-gap: 12px;
+    --row-gap: 12px;
+    width: 100%;
+    padding: 20px 16px 32px;
+  }
+  .elementor-8942 .elementor-element:is(.elementor-element-67569f6, .elementor-element-3098850) {
+    --align-self: center;
+    width: auto;
+  }
+  .elementor-8942 .elementor-element:is(.elementor-element-67569f6, .elementor-element-3098850) > .elementor-widget-container {
+    margin: 0;
+  }
+  .elementor-8942 .elementor-element:is(.elementor-element-67569f6, .elementor-element-3098850) .elementor-button {
+    font-size: 15px;
+    padding: 11px 20px;
+  }
+
+  /* Match the introduction hero to the home page hero. */
+  .elementor-122 .elementor-element.elementor-element-d2cc3a6.ot-intro-hero {
+    --min-height: 700px;
+    --justify-content: center;
+    --align-items: flex-start;
+    background-position: center 65%;
+  }
+  .elementor-18 .elementor-element.elementor-element-876f3df:not(.x),
+  .elementor-122 .elementor-element.elementor-element-d2cc3a6.ot-intro-hero:not(.x) {
+    background-size: cover !important;
+    background-position: center bottom;
+  }
+  .elementor-122 .ot-intro-hero-content {
+    --display: flex;
+    --flex-direction: column;
+    --align-items: flex-start;
+    --padding-top: 2%;
+    --padding-bottom: 2%;
+    --padding-left: 10%;
+    --padding-right: 1%;
+  }
+  .elementor-122 .ot-intro-hero-content img {
+    display: block;
+    width: 45%;
+    height: auto;
+  }
+  .elementor-122 .elementor-element.elementor-element-f82c22a {
+    width: min(34%, 260px);
+    max-width: 260px;
+    --container-widget-width: min(34%, 260px);
+  }
+  @media (min-width: 768px) {
+    .elementor-122 .ot-intro-hero-content { --width: 50%; }
+  }
+
+  /* Introduction: keep the host and organizer block compact on phones. */
+  @media (max-width: 767px) {
+    .elementor-122 .elementor-element.elementor-element-4432242 {
+      padding: 28px 20px;
+    }
+    .elementor-122 .elementor-element.elementor-element-5a1a750 {
+      --margin-top: 0;
+      --margin-bottom: 0;
+      --margin-left: 0;
+      --margin-right: 0;
+      --padding-top: 0;
+      --padding-bottom: 0;
+      --padding-left: 0;
+      --padding-right: 0;
+    }
+    .elementor-122 .elementor-element.elementor-element-64274ef {
+      --row-gap: 20px;
+    }
+    .elementor-122 .elementor-element:is(.elementor-element-5e5a26c, .elementor-element-587a580) {
+      --row-gap: 8px;
+    }
+    .elementor-122 .elementor-element:is(.elementor-element-16bb645, .elementor-element-3821785) .elementor-heading-title {
+      font-size: 18px;
+      line-height: 1.3;
+    }
+    .elementor-122 .elementor-element:is(.elementor-element-4deae20, .elementor-element-bfb6dbb) img {
+      height: 48px !important;
+      width: auto !important;
+      max-width: 100%;
+    }
+  }
+
 </style>
