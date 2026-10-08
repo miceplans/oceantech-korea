@@ -232,6 +232,28 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
   .elementor-location-footer a:visited { color: rgba(255, 255, 255, .9); transition: color .15s; }
   .elementor-location-footer a:hover { color: var(--ot-brand-2); }
 
+  /* No white seam between the footer and the ruler strip: contain the footer's
+     child margins and match its colour to the strip. */
+  .elementor-location-footer { display: flow-root; background: #0B0B0B; }
+  .elementor-location-footer > .e-parent { margin-bottom: 0 !important; --margin-bottom: 0px; }
+  /* Footer: everything left-aligned, left edge matching the header logo. */
+  .elementor-location-footer > .e-parent {
+    --content-width: 100%;
+    max-width: 100% !important;
+    padding-inline: clamp(16px, 4vw, 50px) !important;
+  }
+  .elementor-location-footer .e-con {
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    text-align: left;
+  }
+  .elementor-location-footer .elementor-widget {
+    align-self: flex-start;
+    text-align: left;
+  }
+  .elementor-location-footer .elementor-widget :is(img, .elementor-image) { margin-inline: 0 !important; }
+  .elementor-location-footer .elementor-element-40331b9 { margin-top: 20px; }
+  .elementor-location-footer :is(p, .elementor-widget-text-editor, .elementor-icon-list-items) { text-align: left !important; }
   .ot-footer-ruler-wrap { background: #0B0B0B; padding: 24px 16px 0; }
   .ot-footer-ruler { display: block; width: min(100%, 720px); height: auto; margin: 0 auto; }
 
@@ -446,4 +468,5 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
   nav.elementor-nav-menu--dropdown ul.sub-menu a.elementor-sub-item:is(:hover, :active, .elementor-item-active) {
     font-weight: 800 !important;
   }
+
 </style>
