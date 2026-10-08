@@ -57,6 +57,11 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
           nav.style.setProperty('--mega-left', -navRect.left + 'px');
           nav.style.setProperty('--mega-w', document.documentElement.clientWidth + 'px');
           nav.style.setProperty('--mega-h', height + 'px');
+          // The nav is vertically centered in a taller header bar; push the panel
+          // down to the bar's bottom edge so it doesn't overlap the header.
+          var bar = nav.closest('header.elementor-location-header > .e-parent.e-con') || nav.closest('header');
+          var gap = bar ? Math.max(0, bar.getBoundingClientRect().bottom - navRect.bottom) : 0;
+          nav.style.setProperty('--mega-top', gap + 'px');
         }
         nav.addEventListener('mouseover', sizePanel);
         nav.addEventListener('focusin', sizePanel);
@@ -302,7 +307,7 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
       position: relative;
     }
     .elementor-nav-menu--main .elementor-nav-menu .menu-item-has-children > ul.sub-menu {
-      top: 100%;
+      top: calc(100% + var(--mega-top, 0px));
       inset-inline-start: 0;
       display: none;
       width: 100% !important;
@@ -342,7 +347,7 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
     .elementor-nav-menu--main:focus-within::before {
       content: '';
       position: absolute;
-      top: 100%;
+      top: calc(100% + var(--mega-top, 0px));
       left: var(--mega-left, 0);
       width: var(--mega-w, 100%);
       height: var(--mega-h, 0);
@@ -353,6 +358,16 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
       border-top: 1px solid rgba(11, 31, 51, 0.06);
       box-shadow: 0 8px 16px -4px rgba(11, 31, 51, 0.12);
       z-index: -1;
+    }
+    /* Invisible hover bridge across the gap between the nav and the panel. */
+    .elementor-nav-menu--main:hover::after,
+    .elementor-nav-menu--main:focus-within::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: var(--mega-left, 0);
+      width: var(--mega-w, 100%);
+      height: var(--mega-top, 0);
     }
     .elementor-nav-menu--main .elementor-nav-menu .menu-item-has-children > ul.sub-menu {
       background: transparent !important;
