@@ -273,8 +273,16 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
   }
   /* Material-book year tabs: the 2026 button's element id (26a8e1f1) has no
      width/color rule in the crawled CSS, so it collapsed. Match its siblings. */
-  .elementor-9007 .elementor-element.elementor-element-26a8e1f1 { width: 100%; max-width: 100%; }
-  .elementor-9007 .elementor-element.elementor-element-26a8e1f1 .elementor-button {
+  .elementor-8983 .elementor-element.elementor-element-26a8e1f1,
+  .elementor-8991 .elementor-element.elementor-element-26a8e1f1,
+  .elementor-9007 .elementor-element.elementor-element-26a8e1f1,
+  .elementor-9012 .elementor-element.elementor-element-26a8e1f1,
+  .elementor-9018 .elementor-element.elementor-element-26a8e1f1 { width: 100%; max-width: 100%; }
+  .elementor-8983 .elementor-element.elementor-element-26a8e1f1 .elementor-button,
+  .elementor-8991 .elementor-element.elementor-element-26a8e1f1 .elementor-button,
+  .elementor-9007 .elementor-element.elementor-element-26a8e1f1 .elementor-button,
+  .elementor-9012 .elementor-element.elementor-element-26a8e1f1 .elementor-button,
+  .elementor-9018 .elementor-element.elementor-element-26a8e1f1 .elementor-button {
     background-color: var(--e-global-color-08d83bb);
     fill: #fff;
     color: #fff;
