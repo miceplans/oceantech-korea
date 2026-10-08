@@ -579,4 +579,221 @@ const hasYearTabs = page.body.includes('e-n-tab-title');
     }
   }
 
+  /* Mobile: page-body images, buttons and hero titles centered; nothing
+     overflows the viewport. Header/footer are left alone. */
+  @media (max-width: 767px) {
+    html, body { width: 100%; overflow-x: clip; }
+    [data-elementor-type="wp-page"],
+    [data-elementor-type="wp-page"] .e-con,
+    [data-elementor-type="wp-page"] .e-con-inner {
+      min-width: 0;
+      max-width: 100%;
+    }
+    [data-elementor-type="wp-page"] .elementor-widget-image {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0;
+    }
+    [data-elementor-type="wp-page"] .elementor-widget-image {
+      text-align: center;
+      align-self: center;
+    }
+    [data-elementor-type="wp-page"] .elementor-widget-image img {
+      display: block;
+      margin-inline: auto;
+      max-width: min(100%, calc(100vw - 32px));
+      height: auto;
+    }
+    [data-elementor-type="wp-page"] :is(iframe, video, svg) { max-width: 100%; }
+    /* The home program image has a fixed 1500px Elementor widget width. */
+    .elementor-18 .elementor-element.elementor-element-d548a6d {
+      --container-widget-width: 100%;
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+    .elementor-18 .elementor-element.elementor-element-9765698 {
+      --margin-left: 0;
+      --margin-right: 0;
+      --padding-left: 16px;
+      --padding-right: 16px;
+    }
+    .elementor-18 .elementor-element.elementor-element-22552b7 {
+      --width: 100%;
+      --margin-left: 0;
+      --margin-right: 0;
+      --padding-left: 16px;
+      --padding-right: 16px;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+    .elementor-18 .elementor-element.elementor-element-27cbc01,
+    .elementor-18 .elementor-element.elementor-element-27cbc01 .elementor-widget-container,
+    .elementor-18 .elementor-element.elementor-element-27cbc01 .elementor-custom-embed {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+    .elementor-18 .elementor-element.elementor-element-27cbc01 iframe {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: 360px;
+    }
+    .elementor-18 .elementor-element:is(.elementor-element-b685c37, .elementor-element-723bffa) .elementor-heading-title {
+      font-size: clamp(26px, 7vw, 32px);
+      line-height: 1.2;
+    }
+    .elementor-18 .elementor-element.elementor-element-876f3df,
+    .elementor-122 .ot-intro-hero {
+      --min-height: min(680px, 78svh);
+      --align-items: center;
+      background-position: center;
+    }
+    .elementor-18 .elementor-element.elementor-element-876f3df:not(.x),
+    .elementor-122 .elementor-element.elementor-element-d2cc3a6.ot-intro-hero:not(.x) {
+      background-size: cover !important;
+      background-position: 75% bottom !important;
+    }
+    .elementor-18 .elementor-element.elementor-element-c9fab02,
+    .elementor-122 .ot-intro-hero-content {
+      --width: 100%;
+      --align-items: center;
+      --padding-left: 16px;
+      --padding-right: 16px;
+      align-self: center;
+    }
+    .elementor-18 .elementor-element.elementor-element-d4ca5d2 > .elementor-widget-container {
+      margin: 0;
+    }
+    .elementor-18 .elementor-element.elementor-element-d4ca5d2 img,
+    .elementor-122 .ot-intro-hero-content img {
+      width: clamp(150px, 46vw, 230px);
+    }
+    [data-elementor-type="wp-page"] .elementor-widget-image-box > .elementor-widget-container {
+      padding: 16px;
+    }
+    [data-elementor-type="wp-page"] .elementor-widget-button {
+      align-self: center !important;
+      max-width: 100%;
+    }
+    [data-elementor-type="wp-page"] .elementor-widget-button > .elementor-widget-container {
+      margin-inline: 0 !important;
+    }
+    [data-elementor-type="wp-page"] .elementor-widget-button .elementor-button-wrapper {
+      text-align: center;
+    }
+    [data-elementor-type="wp-page"] .elementor-widget-button .elementor-button {
+      max-width: 100%;
+      font-size: 16px !important;
+      padding: .75em 1.5em !important;
+      white-space: normal !important;
+    }
+    .elementor-8937 .elementor-element.elementor-element-b8b9632 {
+      --width: 100%;
+      --margin-left: 0;
+      --margin-right: 0;
+      --padding-left: 0;
+      --padding-right: 0;
+      width: 100%;
+      max-width: 100%;
+    }
+    .elementor-8937 .elementor-element.elementor-element-e20e4d4 img {
+      display: block;
+      width: 100%;
+    }
+    .elementor-8937 .elementor-element.elementor-element-c034dfc {
+      --align-self: center;
+    }
+    .elementor-8937 .elementor-element.elementor-element-c034dfc > .elementor-widget-container {
+      margin: 16px 0 32px !important;
+    }
+    .elementor-9146 .elementor-element.elementor-element-b8b9632 {
+      --width: 100%;
+      --margin-left: 0;
+      --margin-right: 0;
+      --padding-left: 16px;
+      --padding-right: 16px;
+      width: 100%;
+      max-width: 100%;
+    }
+    .elementor-9146 .elementor-element.elementor-element-b8b9632 > .e-con-inner {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      align-items: center;
+    }
+    .elementor-9146 .elementor-element.elementor-element-0b2d0de {
+      width: 100% !important;
+      max-width: 100%;
+      text-align: center;
+    }
+    .elementor-9146 .elementor-element.elementor-element-0b2d0de img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      margin-inline: auto;
+    }
+    .elementor-8942 .elementor-element.elementor-element-ca7a3f2 {
+      --flex-direction: row;
+      --flex-wrap: wrap;
+      padding: 16px 12px 28px;
+    }
+    .elementor-8942 .elementor-element:is(.elementor-element-67569f6, .elementor-element-3098850) .elementor-button {
+      font-size: 13px !important;
+      padding: 10px 14px !important;
+    }
+    /* Home PARTNERS: smaller section and logos on phones. */
+    .elementor-18 .elementor-element.elementor-element-17e2f26 {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 16px 0 !important;
+      padding: 0 16px !important;
+      box-sizing: border-box;
+      gap: 4px !important;
+    }
+    .elementor-18 .elementor-element-b685c37 .elementor-heading-title {
+      font-size: 22px;
+      line-height: 1.2;
+    }
+    .elementor-18 .elementor-element.elementor-element-f3efc9a {
+      padding: 0 !important;
+      --gap: 16px;
+      --column-gap: 16px;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+    }
+    .elementor-18 .elementor-element-f3efc9a .elementor-widget {
+      width: auto;
+      min-width: 0;
+      flex: 0 1 auto;
+    }
+    .elementor-18 .elementor-element-f3efc9a img {
+      height: 36px !important;
+      width: auto !important;
+      max-width: 100%;
+    }
+    /* Hero titles */
+    [data-elementor-type="wp-page"] .elementor-widget-heading {
+      text-align: center;
+    }
+    [data-elementor-type="wp-page"] .elementor-widget-heading .elementor-heading-title {
+      padding-inline: 16px;
+      overflow-wrap: anywhere;
+    }
+    /* Year tabs (photo gallery): inactive labels were white on light grey. */
+    .e-n-tab-title[aria-selected="false"] {
+      background: #edf2f9 !important;
+      color: var(--ot-ink) !important;
+    }
+    .e-n-tab-title[aria-selected="false"] .e-n-tab-title-text { color: inherit !important; }
+    /* Program lists: keep long speaker lines inside the screen. */
+    [data-elementor-type="wp-page"] :is(p, li, h2, h3, h4, .elementor-heading-title) {
+      overflow-wrap: anywhere;
+      word-break: keep-all;
+    }
+  }
 </style>
